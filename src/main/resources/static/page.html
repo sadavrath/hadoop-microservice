@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body ng-app="myApp">
+	<table class="table" ng-controller="myCtrl" style="width:60%;margin:0 auto">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="emp in employee | limitTo:10">
+        <td>
+          <span ng-if="!emp.editable">{{emp.id}}</span>
+          <span ng-if="emp.editable"><input type="text" ng-model="emp.id"></span>
+        </td>
+        <td>
+           <span ng-if="!emp.editable">{{emp.firstName}}</span>
+           <span ng-if="emp.editable"><input type="text" ng-model="emp.firstName"></span>
+        </td>
+        <td>
+           <span ng-if="!emp.editable">{{emp.lastName}}</span>
+           <span ng-if="emp.editable"><input type="text" ng-model="emp.lastName"></span>
+         </td>
+        <td>
+           <span ng-if="!emp.editable">{{emp.email}}</span>
+           <span ng-if="emp.editable"><input type="text" ng-model="emp.email" ng-blur="updateRow(emp)"></span>
+        </td>
+        <td>
+          <span ng-if="!emp.editable">{{emp.gender}}</span>
+          <span ng-if="emp.editable"><input type="text" ng-model="emp.gender" ng-blur="insert()"></span>
+        </td>
+        <td>
+           <a ng-if="emp.editable==false" style="color:blue;cursor:pointer" ng-click="addRow(emp)">Add |{{emp.editable}}</a>
+		   <a ng-if="emp.editable==false" style="color:blue;cursor:pointer" ng-click="editRow(emp)">Edit |</a>
+	       <a ng-if="emp.editable==false" style="color:blue;cursor:pointer" ng-click="deleteRow(emp)">Delete</a>
+	       <a ng-if="emp.editable==true" style="color:blue;cursor:pointer" ng-click="saveRow(emp)">Save</a>
+	       <a ng-if="emp.editable==true" style="color:blue;cursor:pointer" ng-click="cancelRow(emp)">Cancel</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="script.js"></script>
+</body>
+</html>
